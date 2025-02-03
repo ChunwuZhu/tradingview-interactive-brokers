@@ -4,7 +4,7 @@ import asyncio, time, random
 
 # connect to Interactive Brokers 
 ib = IB()
-ib.connect('127.0.0.1', 7497, clientId=1)
+ib.connect('127.0.0.1', 7496, clientId=1)
 
 # connect to Redis and subscribe to tradingview messages
 r = redis.Redis(host='localhost', port=6379, db=0)
@@ -12,16 +12,15 @@ p = r.pubsub()
 p.subscribe('tradingview')
 
 async def check_messages():
-    print(f"{time.time()} - checking for tradingview webhook messages")
+    # print(f"{time.time()} - checking for tradingview webhook messages")
     message = p.get_message()
+    # print(message)
     if message is not None and message['type'] == 'message':
         print(message)
-
-        message_data = json.loads(message['data'])
-
-        stock = Stock(message_data['ticker'], 'SMART', 'USD')
-        order = MarketOrder(message_data['strategy']['order_action'], message_data['strategy']['order_contracts'])
-        trade = ib.placeOrder(stock, order)
+        # message_data = json.loads(message['data'])
+        # stock = Stock(message_data['ticker'], 'SMART', 'USD')
+        # order = MarketOrder(message_data['strategy']['order_action'], message_data['strategy']['order_contracts'])
+        # trade = ib.placeOrder(stock, order)
 
 async def run_periodically(interval, periodic_function):
     while True:

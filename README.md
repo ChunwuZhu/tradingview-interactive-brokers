@@ -20,12 +20,23 @@ https://buymeacoffee.com/parttimelarry
 * Requires redis, Python3, and packages installed
 
 ```
+python==3.9
+Werkzeug==2.2.2
+
 pip3 install -r requirements.txt
 
 export FLASK_APP=webapp
 export FLASK_ENV=development
+
+
+In windows, change the name of webapp.py to app.py and run the following commands:
 flask run
+
+choco install ngrok
+install redis
 ```
+
+
 
 ## References, Tools, and Libraries Used:
 
